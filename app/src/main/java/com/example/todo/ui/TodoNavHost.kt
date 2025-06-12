@@ -1,6 +1,7 @@
 package com.example.todo.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -17,6 +18,7 @@ private const val EDIT_ROUTE = "edit/{id}"
 fun TodoNavHost(viewModelFactory: TaskViewModelFactory, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val viewModel: TaskViewModel = viewModel(factory = viewModelFactory)
+    val tasks = viewModel.tasks.collectAsState()
 
     NavHost(navController, startDestination = LIST_ROUTE, modifier = modifier) {
         composable(LIST_ROUTE) {
@@ -37,7 +39,7 @@ fun TodoNavHost(viewModelFactory: TaskViewModelFactory, modifier: Modifier = Mod
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id") ?: 0
-            val task = viewModel.tasks.value.firstOrNull { it.id == id }
+            val task = tasks.value.firstOrNull { it.id == id }
             AddEditTaskScreen(task = task, onSave = { title ->
                 task?.let { viewModel.updateTask(it.copy(title = title)) }
                 navController.popBackStack()
