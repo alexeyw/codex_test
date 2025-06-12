@@ -1,0 +1,11 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local properties
+local.properties
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
