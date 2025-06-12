@@ -1,6 +1,6 @@
 # TodoCompose
 
-A simple Android application built with Kotlin and Jetpack Compose using the MVVM architecture. The app displays a list of tasks.
+A simple Android application built with Kotlin and Jetpack Compose using the MVVM architecture. The app now persists tasks using Room and provides full CRUD functionality.
 
 ## Requirements
 
@@ -26,10 +26,10 @@ The app should install and launch on the connected device or emulator.
 ## Project Structure
 
 - `app`: Android application module
+  - `data`: Room entities, database and repository
   - `ui`: Compose UI and ViewModel implementations
-  - `data`: Simple data classes
 
-The UI is implemented with Jetpack Compose. `TaskViewModel` exposes a `StateFlow` of tasks. `TaskListScreen` collects this flow and displays the items in a `LazyColumn`.
+Tasks are stored locally in a Room database. `TaskViewModel` exposes a `StateFlow` of tasks which updates automatically when changes occur. `TaskListScreen` displays the list and navigation allows adding or editing tasks.
 
 ## License
 
