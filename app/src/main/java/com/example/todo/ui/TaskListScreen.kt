@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.unit.dp
@@ -29,7 +30,8 @@ import com.example.todo.data.Task
 fun TaskListScreen(
     viewModel: TaskViewModel = viewModel(),
     onAdd: () -> Unit = {},
-    onEdit: (Task) -> Unit = {}
+    onEdit: (Task) -> Unit = {},
+    onLogout: () -> Unit = {}
 ) {
     val tasks = viewModel.tasks.collectAsState()
 
@@ -38,6 +40,9 @@ fun TaskListScreen(
             TopAppBar(title = { Text("Tasks") }, actions = {
                 IconButton(onClick = onAdd) {
                     Icon(Icons.Filled.Add, contentDescription = "Add task")
+                }
+                IconButton(onClick = onLogout) {
+                    Icon(Icons.Filled.ExitToApp, contentDescription = "Logout")
                 }
             })
         },
